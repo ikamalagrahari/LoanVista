@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>Create Loan - Credit Approval System</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Credit Approval System</h1>
+            <nav>
+                <ul>
+                    <li><a href="/api/">Dashboard</a></li>
+                    <li><a href="/api/register">Register Customer</a></li>
+                    <li><a href="/api/check-eligibility">Check Eligibility</a></li>
+                    <li><a href="/api/create-loan">Create Loan</a></li>
+                    <li><a href="/api/view-loan">View Loan</a></li>
+                    <li><a href="/api/view-loans">View Loans</a></li>
+                    <li><a href="/api/upload-data">Upload Data</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h2>Create New Loan</h2>
+                <p>Enter loan details to create a new loan application for an existing customer.</p>
+
+                <form id="loanForm">
+                    <div class="form-group">
+                        <label for="customer_id">Customer ID:</label>
+                        <input type="number" id="customer_id" name="customer_id" min="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan_amount">Loan Amount:</label>
+                        <input type="number" id="loan_amount" name="loan_amount" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interest_rate">Interest Rate (%):</label>
+                        <input type="number" id="interest_rate" name="interest_rate" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tenure">Tenure (months):</label>
+                        <input type="number" id="tenure" name="tenure" min="1" required>
+                    </div>
+
+                    <button type="submit" class="btn">Create Loan</button>
+                </form>
+
+                <div id="result" class="result" style="display: none;"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Credit Approval System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        document.getElementById('loanForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateForm(e.target)) {
+                return;
+            }
+            await submitForm('loanForm', '/api/create-loan');
+        });
+    </script>
+</body>
+</html>

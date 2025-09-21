@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>Track Loans - Credit Approval System</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .note {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Track Loans</h1>
+        <form id="trackLoansForm">
+            <div class="input-group">
+                <label for="loan_id">Loan ID (optional):</label>
+                <input type="number" id="loan_id" name="loan_id" placeholder="Enter Loan ID to track specific loan" min="1">
+            </div>
+            <div class="input-group">
+                <label for="customer_id">Customer ID (optional):</label>
+                <input type="number" id="customer_id" name="customer_id" placeholder="Enter Customer ID to view all loans" min="1">
+            </div>
+            <button type="submit" class="btn">Track Loans</button>
+        </form>
+        <p class="note">Enter either Loan ID or Customer ID to track loans. If both are provided, Loan ID takes precedence.</p>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        document.getElementById('trackLoansForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loanId = document.getElementById('loan_id').value;
+            const customerId = document.getElementById('customer_id').value;
+
+            if (!loanId && !customerId) {
+                displayResult(document.getElementById('result'), {error: 'Please provide either Loan ID or Customer ID'}, false);
+                return;
+            }
+
+            if (!validateForm(e.target)) {
+                return;
+            }
+
+            await submitForm('trackLoansForm', '/api/track-loans');
+        });
+    </script>
+</body>
+</html>

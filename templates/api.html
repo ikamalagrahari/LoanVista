@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Approval System API Endpoints</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; max-width: 800px; margin: auto; }
+        h1 { text-align: center; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .method { font-weight: bold; color: #4CAF50; }
+        .endpoint { font-family: monospace; }
+        .description { margin-top: 5px; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>Credit Approval System API Endpoints</h1>
+    <ul>
+        <li>
+            <span class="method">POST</span> <span class="endpoint">/api/register</span>
+            <div class="description">Register a new customer. Requires: first_name, last_name, age, monthly_income, phone_number.</div>
+        </li>
+        <li>
+            <span class="method">POST</span> <span class="endpoint">/api/check-eligibility</span>
+            <div class="description">Check loan eligibility for a customer. Requires: customer_id, loan_amount, interest_rate, tenure.</div>
+        </li>
+        <li>
+            <span class="method">POST</span> <span class="endpoint">/api/create-loan</span>
+            <div class="description">Create a loan for a customer. Requires: customer_id, loan_amount, interest_rate, tenure.</div>
+        </li>
+        <li>
+            <span class="method">GET</span> <span class="endpoint">/api/view-loan/<loan_id></span>
+            <div class="description">View details of a specific loan by loan ID.</div>
+        </li>
+        <li>
+            <span class="method">GET</span> <span class="endpoint">/api/view-loans/<customer_id></span>
+            <div class="description">View all loans for a specific customer by customer ID.</div>
+        </li>
+        <li>
+            <span class="method">POST</span> <span class="endpoint">/api/upload-data</span>
+            <div class="description">Upload CSV or Excel file containing customer or loan data for bulk import.</div>
+        </li>
+    </ul>
+    <p><a href="/api/">Back to API Home</a></p>
+</body>
+</html>

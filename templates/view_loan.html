@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Loan - Credit Approval System</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Credit Approval System</h1>
+            <nav>
+                <ul>
+                    <li><a href="/api/">Dashboard</a></li>
+                    <li><a href="/api/register">Register Customer</a></li>
+                    <li><a href="/api/check-eligibility">Check Eligibility</a></li>
+                    <li><a href="/api/create-loan">Create Loan</a></li>
+                    <li><a href="/api/view-loan">View Loan</a></li>
+                    <li><a href="/api/view-loans">View Loans</a></li>
+                    <li><a href="/api/upload-data">Upload Data</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h2>View Loan Details</h2>
+                <p>Enter a loan ID to view the complete details of a specific loan.</p>
+
+                <form id="viewLoanForm">
+                    <div class="form-group">
+                        <label for="loan_id">Loan ID:</label>
+                        <input type="number" id="loan_id" name="loan_id" min="1" required>
+                    </div>
+                    <button type="submit" class="btn">View Loan</button>
+                </form>
+
+                <div id="result" class="result" style="display: none;"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Credit Approval System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        document.getElementById('viewLoanForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateForm(e.target)) {
+                return;
+            }
+            const loanId = document.getElementById('loan_id').value;
+            await submitForm('viewLoanForm', `/api/view-loan/${loanId}`, 'GET');
+        });
+    </script>
+</body>
+</html>

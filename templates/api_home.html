@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>Credit Approval System - Interactive Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <div class="container">
+            <h1>Credit Approval System</h1>
+            <nav>
+                <ul>
+                    <li><a href="/api/" title="Dashboard"><span>🏠</span> Dashboard</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="tooltip" title="Customer Management">
+                            <span>👥</span> Customers <span>▼</span>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="/api/register" title="Register new customer">Register Customer</a>
+                            <a href="/api/view-loans" title="View customer loans">View Customer Loans</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="tooltip" title="Loan Management">
+                            <span>💳</span> Loans <span>▼</span>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="/api/check-eligibility" title="Check loan eligibility">Check Eligibility</a>
+                            <a href="/api/create-loan" title="Create new loan">Create Loan</a>
+                            <a href="/api/track-loans" title="Track loans">Track Loans</a>
+                            <a href="/api/view-loan" title="View specific loan">View Loan</a>
+                        </div>
+                    </li>
+                    <li><a href="/api/upload-data" title="Upload data files"><span>📁</span> Upload Data</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="nav-search" placeholder="Search features..." aria-label="Search dashboard features">
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="card fade-in">
+                <h2>🚀 Welcome to Credit Approval System</h2>
+                <p>Experience our fully interactive dashboard with real-time updates, modern UI, and seamless loan management. Switch to dark mode, search features, and enjoy smooth animations!</p>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section fade-in">
+                <h2>📊 System Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4 id="total-customers">1,247</h4>
+                        <p>Total Customers</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 id="active-loans">856</h4>
+                        <p>Active Loans</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 id="total-amount">₹2.4M</h4>
+                        <p>Total Loan Amount</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4 id="approval-rate">94%</h4>
+                        <p>Approval Rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Dashboard -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card tooltip">
+                    <h3>👤 Register Customer</h3>
+                    <p>Add new customers to the system with their personal and financial details. Quick registration process.</p>
+                    <a href="/api/register" class="btn">Register Now</a>
+                    <span class="tooltip-text">Start by registering a new customer to begin the loan process</span>
+                </div>
+
+                <div class="dashboard-card tooltip">
+                    <h3>✅ Check Eligibility</h3>
+                    <p>Verify if a customer is eligible for a loan based on their credit score and financial details.</p>
+                    <a href="/api/check-eligibility" class="btn">Check Eligibility</a>
+                    <span class="tooltip-text">Run eligibility check before creating loan applications</span>
+                </div>
+
+                <div class="dashboard-card tooltip">
+                    <h3>💰 Create Loan</h3>
+                    <p>Create new loan applications for eligible customers with customized terms and conditions.</p>
+                    <a href="/api/create-loan" class="btn">Create Loan</a>
+                    <span class="tooltip-text">Generate loan applications with automatic approval checks</span>
+                </div>
+
+                <div class="dashboard-card tooltip">
+                    <h3>🔍 Track Loans</h3>
+                    <p>Track specific loans or view all loans for a customer with detailed information and status.</p>
+                    <a href="/api/track-loans" class="btn">Track Loans</a>
+                    <span class="tooltip-text">Monitor loan progress and repayment status</span>
+                </div>
+
+                <div class="dashboard-card tooltip">
+                    <h3>📋 View Loan Details</h3>
+                    <p>Look up specific loan details by loan ID with complete transaction history.</p>
+                    <a href="/api/view-loan" class="btn">View Loan</a>
+                    <span class="tooltip-text">Access detailed loan information and payment history</span>
+                </div>
+
+                <div class="dashboard-card tooltip">
+                    <h3>📊 Customer Portfolio</h3>
+                    <p>See all loans associated with a specific customer in a comprehensive table format.</p>
+                    <a href="/api/view-loans" class="btn">View Portfolio</a>
+                    <span class="tooltip-text">Review customer's complete loan portfolio</span>
+                </div>
+
+                <div class="dashboard-card tooltip">
+                    <h3>📤 Upload Data</h3>
+                    <p>Bulk import customer and loan data from Excel or CSV files with progress tracking.</p>
+                    <a href="/api/upload-data" class="btn">Upload Data</a>
+                    <span class="tooltip-text">Import large datasets efficiently with validation</span>
+                </div>
+
+                <div class="dashboard-card tooltip">
+                    <h3>📖 API Documentation</h3>
+                    <p>Access comprehensive API documentation and integration guides for developers.</p>
+                    <a href="/api/docs" class="btn">View Docs</a>
+                    <span class="tooltip-text">Technical documentation for API integration</span>
+                </div>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <div class="card fade-in">
+                <h2>🔔 Recent Activity</h2>
+                <div id="recent-activity">
+                    <div class="result success">
+                        <p><strong>2 minutes ago:</strong> New customer registered (ID: 1247)</p>
+                    </div>
+                    <div class="result success">
+                        <p><strong>5 minutes ago:</strong> Loan application approved (ID: 856)</p>
+                    </div>
+                    <div class="result">
+                        <p><strong>10 minutes ago:</strong> Data upload completed (150 records)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🏢 Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/support">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>📚 Resources</h4>
+                    <ul>
+                        <li><a href="/api/docs">API Documentation</a></li>
+                        <li><a href="/guides">User Guides</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/changelog">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>🔗 Quick Links</h4>
+                    <ul>
+                        <li><a href="/api/register">Register Customer</a></li>
+                        <li><a href="/api/create-loan">Create Loan</a></li>
+                        <li><a href="/api/upload-data">Upload Data</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>📱 Connect</h4>
+                    <ul>
+                        <li><a href="https://twitter.com/creditapproval" target="_blank" rel="noopener">Twitter</a></li>
+                        <li><a href="https://linkedin.com/company/creditapproval" target="_blank" rel="noopener">LinkedIn</a></li>
+                        <li><a href="https://github.com/creditapproval" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="mailto:support@creditapproval.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Credit Approval System. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+                <p>Made with ❤️ for seamless loan management</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
